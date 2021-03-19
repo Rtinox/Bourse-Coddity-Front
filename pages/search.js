@@ -20,10 +20,13 @@ export default function Home() {
           placeholder="Phrase, mots, ..."
           className={styles.inputbar}
         ></input>
+        <button className={styles.transparentBtn}>
+          <img src='./search.png' alt='my image' width='30px' />
+        </button>
       </div>
 
       <main className={styles.main}>
-        
+
         <div className={stylesC.card}>
           <div>
             <h4>Wiw</h4>
