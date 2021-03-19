@@ -11,10 +11,10 @@ export default function Navbar() {
       </div>
       <div className={styles.headeritems}>
         <button className={styles.loginButton}>
-          {router.basePath == '/login' ? (
-            <Link href='/login'>Se connecter</Link>
+          {router.basePath != '/login' ? (
+            <Link href='/login' className={styles.connectBtn}>Se connecter</Link>
           ) : (
-            <Link href='/register'>S'inscrire</Link>
+            <Link href='/register' className={styles.connectBtn}>S'inscrire</Link>
           )}
         </button>
       </div>
