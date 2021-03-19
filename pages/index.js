@@ -29,7 +29,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Bourse coddity 2021 - Par _Rtinox et PJGame
+          Bourse <a href="https://coddity.com/">coddity</a> 2021 - Par _Rtinox et PJGame
         </a>
       </footer>
     </div>
