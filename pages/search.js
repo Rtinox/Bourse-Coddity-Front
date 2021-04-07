@@ -19,14 +19,13 @@ export default function Home() {
       </Head>
 
       {Navbar()}
- 
+
       <Form action='search'>
           <input
             type="text"
-            placeholder="Phrase, mots, ..."
+            placeholder={q}
             className={styles.inputbar} 
             name='q'
-            value={q}
           ></input>
           <Button className={styles.transparentBtn} type='submit'>
             <img src="./search.png" alt="my image" width="30px" />
