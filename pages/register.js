@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import styles from '../styles/Home.module.css';
-import Navbar from './../components/Navbar';
-import Footer from './../components/Footer';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import { Form, Button } from 'react-bootstrap';
 
 export default function Login() {
@@ -15,7 +15,7 @@ export default function Login() {
       {Navbar()}
 
       <main className={styles.main}>
-        <h3>Connexion</h3>
+        <h3>Enregistrement</h3>
         <Form>
           <Form.Group controlId='formBasicEmail'>
             <Form.Label>Email address</Form.Label>
@@ -28,13 +28,17 @@ export default function Login() {
             <Form.Label>Password</Form.Label>
             <Form.Control type='password' placeholder='Password' />
           </Form.Group>
+          <Form.Group controlId='formBasicPassword'>
+            <Form.Label>Password verification</Form.Label>
+            <Form.Control type='password' placeholder='Password' />
+          </Form.Group>
           <Form.Group controlId='formBasicCheckbox'>
             <Form.Check type='checkbox' label='Check me out' />
           </Form.Group>
           <Button variant='primary' type='submit' className='buttonForm'>
             Submit
           </Button>
-          <Button href="register" className='buttonForm'>S'enregistrer ?</Button>
+          <Button href="login" className='buttonForm'>Se connecter ?</Button>
         </Form>
       </main>
 
