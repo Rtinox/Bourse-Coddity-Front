@@ -19,7 +19,7 @@ export default function Home() {
       </Head>
 
       {Navbar()}
-
+ 
       <Form action='search'>
           <input
             type="text"
