@@ -1,0 +1,131 @@
+.columns {
+  height: 100%;
+  border-radius: 7px;
+}
+
+.column {
+  height: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.column2 {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.section {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  background-color: #727272;
+}
+
+.divblock {
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  border-radius: 12px;
+  background-color: #c4c4c4;
+}
+
+.section2 {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  background-color: #727272;
+}
+
+.heading {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 0px;
+  padding-right: 10px;
+  padding-left: 10px;
+  border-radius: 12px;
+  background-color: #8b8b8b;
+  color: #fff;
+  font-size: 26px;
+}
+
+.paragraph {
+  margin-bottom: 0px;
+}
+
+.wcontainer .wrow {
+	margin-left: -10px;
+	margin-right: -10px
+}
+
+.wrow:before,
+.wrow:after {
+	content: " ";
+	display: table;
+	grid-column-start: 1;
+	grid-row-start: 1;
+	grid-column-end: 2;
+	grid-row-end: 2
+}
+
+.wrow:after {
+	clear: both
+}
+
+.wrow .wrow {
+	margin-left: 0;
+	margin-right: 0
+}
+
+.wcol {
+	position: relative;
+	float: left;
+	width: 100%;
+	min-height: 1px;
+	padding-left: 10px;
+	padding-right: 10px
+}
+
+.wcol .wcol {
+	padding-left: 0;
+	padding-right: 0
+}
+
+.wcol3 {
+	width: 25%
+}
+
+.wcol4 {
+	width: 33.33333333%
+}
+
+.wcol5 {
+	width: 41.66666667%
+}
+
+.wcol6 {
+	width: 50%
+}
+
+.wcol7 {
+	width: 58.33333333%
+}
+
+.wcol8 {
+	width: 66.66666667%
+}
+
+.wcol9 {
+	width: 75%
+}
+
+.wcol10 {
+	width: 83.33333333%
+}
+
+.wcol11 {
+	width: 91.66666667%
+}
+
+.wcol12 {
+	width: 100%
+}
