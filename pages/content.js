@@ -17,9 +17,9 @@ export default function Home() {
 
       {Navbar()}
 
-      <main className={styles.main} style={{ justifyContent: 'flex-start' }}>
-        <div className={[style.columns, style.wrow].join(' ')}>
-          <div className={[style.column, style.wcol, style.wcol8].join(' ')}>
+      <main className={styles.main} style={{ justifyContent: "flex-start" }}>
+        <div className={[style.columns, style.wrow].join(" ")}>
+          <div className={[style.column, style.wcol, style.wcol8].join(" ")}>
             <h1 className={style.heading}>Title</h1>
             <div className={style.divblock}>
               <p className={style.paragraph}>
@@ -32,10 +32,30 @@ export default function Home() {
               </p>
             </div>
           </div>
-          <div className={[style.column2, style.wcol, style.wcol4].join(' ')}>
-            <div className={style.section}>a</div>
-            <div className={style.section}>b</div>
-            <div className={style.section}>c</div>
+          <div className={[style.column2, style.wcol, style.wcol4].join(" ")}>
+            <div className={style.section}>
+              <h3>Sources</h3>
+              <ul>
+                <li>
+                  <a href="https://proedt.fr" target="_blank">
+                    ProEDT
+                  </a>
+                </li>
+                <li>
+                  <a href="https://google.fr" target="_blank">
+                    Google
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div className={style.section}>
+              <h3>Articles similaires</h3>
+            </div>
+            <div className={style.section}>
+              <h3>Participants</h3>
+            </div>
+
+            <Button>Edit</Button>
           </div>
         </div>
       </main>

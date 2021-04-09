@@ -39,7 +39,7 @@ export default function Home() {
             <p>Oui bien sur avec une grande frite ?</p>
           </div>
           <div>
-            <button className={stylesC.seeBtn}>Voir</button>
+            <Button className={stylesC.seeBtn} href="/content">Voir</Button>
           </div>
         </div>
       </main>

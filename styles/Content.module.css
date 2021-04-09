@@ -18,7 +18,8 @@
   margin-top: 10px;
   margin-bottom: 10px;
   border-radius: 12px;
-  background-color: #727272;
+  background-color: #454952;
+  padding: 10px;
 }
 
 .divblock {
@@ -26,7 +27,7 @@
   height: auto;
   padding: 10px;
   border-radius: 12px;
-  background-color: #c4c4c4;
+  background-color: #b9b9b9;
 }
 
 .section2 {
@@ -40,16 +41,21 @@
   margin-top: 10px;
   margin-bottom: 10px;
   margin-left: 0px;
+  
   padding-right: 10px;
   padding-left: 10px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+
   border-radius: 12px;
-  background-color: #8b8b8b;
+  background-color: #454952;
   color: #fff;
   font-size: 26px;
 }
 
 .paragraph {
   margin-bottom: 0px;
+  color: black;
 }
 
 .wcontainer .wrow {
