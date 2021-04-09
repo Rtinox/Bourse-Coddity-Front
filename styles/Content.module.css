@@ -1,6 +1,7 @@
 .columns {
   height: 100%;
   border-radius: 7px;
+  width: 100%;
 }
 
 .column {
@@ -134,4 +135,23 @@
 
 .wcol12 {
 	width: 100%
+}
+
+.textfield
+{
+  font-size: .8rem;
+    letter-spacing: 1px;
+    padding: 10px;
+    line-height: 1.5;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px #999;
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 100%;
+}
+
+.titleInput
+{
+  border: none;
+  width: 100%;
 }

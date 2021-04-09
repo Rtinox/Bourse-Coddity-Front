@@ -23,7 +23,7 @@ export default function Home() {
       <Form action='search'>
           <input
             type="text"
-            placeholder={q}
+            defaultValue={q}
             className={styles.inputbar} 
             name='q'
           ></input>

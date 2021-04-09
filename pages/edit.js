@@ -20,16 +20,15 @@ export default function Home() {
       <main className={styles.main} style={{ justifyContent: "flex-start" }}>
         <div className={[style.columns, style.wrow].join(" ")}>
           <div className={[style.column, style.wcol, style.wcol8].join(" ")}>
-            <h1 className={style.heading}>Title</h1>
+            <input type="text" className={[style.titleInput, style.heading].join(" ")} defaultValue="Title"></input>
             <div className={style.divblock}>
-              <p className={style.paragraph}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse varius enim in eros elementum tristique. Duis
-                cursus, mi quis viverra ornare, eros dolor interdum nulla, ut
-                commodo diam libero vitae erat. Aenean faucibus nibh et justo
-                cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
-                tristique posuere.
-              </p>
+              <textarea className={style.textfield} 
+              defaultValue="Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              Suspendisse varius enim in eros elementum tristique. Duis
+              cursus, mi quis viverra ornare, eros dolor interdum nulla, ut
+              commodo diam libero vitae erat. Aenean faucibus nibh et justo
+              cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
+              tristique posuere."></textarea>
             </div>
           </div>
           <div className={[style.column2, style.wcol, style.wcol4].join(" ")}>
@@ -55,7 +54,7 @@ export default function Home() {
               <h3>Participants</h3>
             </div>
 
-            <Button href="/edit">Edit</Button>
+            <Button href="/content">Valider</Button>
           </div>
         </div>
       </main>
