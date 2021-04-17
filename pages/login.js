@@ -26,8 +26,8 @@ export default function Login() {
     if (response.ok) {
       const i = await response.json();
       const user = jwt.decode(i.data.access_token);
-      cookieCutter.set('access_token', i.data.access_token, { expires: new Date(user.exp*1000).toUTCString() })
-      cookieCutter.set('refresh_token', i.data.refresh_token, { expires: new Date(user.exp*1000).toUTCString() })
+      window.localStorage.setItem("access_token", i.data.access_token)
+      window.localStorage.setItem("refresh_token", i.data.refresh_token)
       setLoginError(`Bienvenue ${user.pseudo}`);
     } else {
       const i = await response.json();
