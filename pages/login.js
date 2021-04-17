@@ -3,8 +3,39 @@ import styles from '../styles/Home.module.css';
 import Navbar from './../components/Navbar';
 import Footer from './../components/Footer';
 import { Form, Button } from 'react-bootstrap';
+import { useState } from 'react';
+import jwt from 'jsonwebtoken';
+import cookieCutter from 'cookie-cutter'
 
 export default function Login() {
+
+  const [loginError, setLoginError] = useState('');
+  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
+
+  const apiUrl = "https://codity-wedidit.herokuapp.com/";
+
+  const login = async event => {
+    event.preventDefault();
+    
+    const response = await fetch(apiUrl + "auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password })
+    });
+    if (response.ok) {
+      const i = await response.json();
+      const user = jwt.decode(i.data.access_token);
+      cookieCutter.set('access_token', i.data.access_token, { expires: new Date(user.exp*1000).toUTCString() })
+      cookieCutter.set('refresh_token', i.data.refresh_token, { expires: new Date(user.exp*1000).toUTCString() })
+      setLoginError(`Bienvenue ${user.pseudo}`);
+    } else {
+      const i = await response.json();
+      setLoginError(i.data.message);
+    }
+  }
+
+
   return (
     <div className={styles.container}>
       <Head>
@@ -16,17 +47,18 @@ export default function Login() {
 
       <main className={styles.main}>
         <h3>Connexion</h3>
-        <Form>
+        <h4>{loginError}</h4>
+        <Form onSubmit={login}>
           <Form.Group controlId='formBasicEmail'>
             <Form.Label>Email address</Form.Label>
-            <Form.Control type='email' placeholder='Enter email' />
+            <Form.Control type='email' placeholder='Enter email' value={email} onChange={(e) => setEmail(e.target.value)} required/>
             <Form.Text className='text-muted'>
               We'll never share your email with anyone else.
             </Form.Text>
           </Form.Group>
           <Form.Group controlId='formBasicPassword'>
             <Form.Label>Password</Form.Label>
-            <Form.Control type='password' placeholder='Password' />
+            <Form.Control type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} required/>
           </Form.Group>
           <Form.Group controlId='formBasicCheckbox'>
             <Form.Check type='checkbox' label='Check me out' />

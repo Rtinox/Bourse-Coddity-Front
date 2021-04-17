@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "bootstrap": "^4.6.0",
+    "cookie-cutter": "^0.2.0",
+    "jsonwebtoken": "^8.5.1",
     "next": "10.0.8",
     "react": "17.0.1",
     "react-bootstrap": "^1.5.2",

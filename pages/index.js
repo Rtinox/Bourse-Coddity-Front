@@ -5,6 +5,8 @@ import Footer from "./../components/Footer";
 import { Button, Form } from "react-bootstrap";
 import React, { useState } from 'react';
 
+import cookieCutter from 'cookie-cutter'
+
 export default function Home() {
   const [search, setSearch] = useState('')
   return (

@@ -3,8 +3,34 @@ import styles from '../styles/Home.module.css';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { Form, Button } from 'react-bootstrap';
+import { useState } from 'react';
 
 export default function Login() {
+
+  const [registerError, setRegisterError] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [pseudo, setPseudo] = useState('');
+
+  const apiUrl = "https://codity-wedidit.herokuapp.com/";
+
+  const register = async event => {
+    event.preventDefault();
+
+    const response = await fetch(apiUrl + "users/new", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ pseudo, email, password })
+    });
+    if (response.ok) {
+      const i = await response.json();
+      setRegisterError("Vous pouvez vous connecter !");
+    } else {
+      const i = await response.json();
+      setRegisterError(i.data.message);
+    }
+  }
+
   return (
     <div className={styles.container}>
       <Head>
@@ -16,25 +42,23 @@ export default function Login() {
 
       <main className={styles.main}>
         <h3>Enregistrement</h3>
-        <Form>
-          <Form.Group controlId='formBasicEmail'>
+        <h4>{registerError}</h4>
+        <Form onSubmit={register}>
+          <Form.Group>
+            <Form.Label>Pseudo</Form.Label>
+            <Form.Control type='text' placeholder='Enter pseudo' value={pseudo} onChange={(e) => setPseudo(e.target.value)} required/>
+          </Form.Group>
+
+          <Form.Group>
             <Form.Label>Email address</Form.Label>
-            <Form.Control type='email' placeholder='Enter email' />
-            <Form.Text className='text-muted'>
-              We'll never share your email with anyone else.
-            </Form.Text>
+            <Form.Control type='email' placeholder='Enter email' value={email} onChange={(e) => setEmail(e.target.value)} required/>
           </Form.Group>
-          <Form.Group controlId='formBasicPassword'>
+
+          <Form.Group>
             <Form.Label>Password</Form.Label>
-            <Form.Control type='password' placeholder='Password' />
+            <Form.Control type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} required/>
           </Form.Group>
-          <Form.Group controlId='formBasicPassword'>
-            <Form.Label>Password verification</Form.Label>
-            <Form.Control type='password' placeholder='Password' />
-          </Form.Group>
-          <Form.Group controlId='formBasicCheckbox'>
-            <Form.Check type='checkbox' label='Check me out' />
-          </Form.Group>
+
           <Button variant='primary' type='submit' className='buttonForm'>
             Submit
           </Button>
