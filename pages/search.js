@@ -37,7 +37,7 @@ export default function Home() {
       const response = await fetch(apiUrl + "articles/search", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({$or: [{ title: query}, {text: query}, {contributors: query}, {sources: query}]})
+        body: JSON.stringify({$or: [{ title: query}, {text: query}, {sources: query}]})
       });
       if (response.ok) {
         const i = await response.json();
