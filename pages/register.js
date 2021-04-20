@@ -25,6 +25,7 @@ export default function Login() {
     if (response.ok) {
       const i = await response.json();
       setRegisterError("Vous pouvez vous connecter !");
+      window.location.href = "/login";
     } else {
       const i = await response.json();
       setRegisterError(i.data.message);

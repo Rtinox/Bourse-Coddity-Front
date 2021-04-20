@@ -29,6 +29,7 @@ export default function Login() {
       window.localStorage.setItem("access_token", i.data.access_token)
       window.localStorage.setItem("refresh_token", i.data.refresh_token)
       setLoginError(`Bienvenue ${user.pseudo}`);
+      window.location.href = "/";
     } else {
       const i = await response.json();
       setLoginError(i.data.message);
