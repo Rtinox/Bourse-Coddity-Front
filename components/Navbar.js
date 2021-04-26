@@ -28,6 +28,15 @@ export default function Navbar() {
 
   useEffect(() => 
   {
+    console.log(user);
+    if(user != null && new Date(user.exp) > new Date())
+    {
+      console.log('oui');
+      setUser(null);
+      window.localStorage.removeItem("access_token")
+      window.localStorage.removeItem("refresh_token")
+    }
+
     if(user != null) setLogged(true);
     else setLogged(false);
   }, [user])
@@ -63,7 +72,7 @@ export default function Navbar() {
       <div className={styles.headeritems}>
         { logged ?
           (
-            <h5>{user.pseudo} - <a href="#" onClick={logout}>Logout</a></h5>
+              <h5><Link href="/edit">Créer</Link> - {user.pseudo} - <a href="#" onClick={logout}>Logout</a></h5>
           ) : (
             <button className={styles.loginButton}>
             {router.basePath != '/login' ? (

@@ -13,10 +13,13 @@ export default function Home() {
   const router = useRouter()
   const { id } = router.query;
 
-  const [title, setTitle] = useState("Chargement en cours ...");
+  const [title, setTitle] = useState("Titre");
   const [text, setText] = useState("Ne charge pas tes épaules d'un fardeau qui excède tes forces.");
   const [sources, setSources] = useState([]);
   const [contributors, setContributors] = useState([]);
+
+  
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(async () => {
     if (id !== undefined && id.length !== 0) {
@@ -39,27 +42,35 @@ export default function Home() {
 
   async function save()
   {
+    let path = `articles/${id}`;
+    let method = "PUT";
+    if(id == undefined)
+    {
+      path = `articles/new`;
+      method = "POST";
+    }
+
     const token = window.localStorage.getItem("access_token");
-    const response = await fetch(apiUrl + `articles/${id}`, {
-      method: "PUT",
+    const response = await fetch(apiUrl + path, {
+      method: method,
       headers: {
         "Authorization": `Bearer ${token}`,
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json' 
       },
-      body: 
+      body: JSON.stringify(
       {
         title: title,
         text: text,
         sources: sources,
         contributors: contributors
       }
-    });
+    )});
     if (response.ok) {
       const i = await response.json();
-      window.location.href = "/content?id=" + id;
+      window.location.href = "/content?id=" + i.data._id;
     } else {
       const i = await response.json();
-      setRegisterError(i.data.message);
+      setErrorMessage(i.data.message);
     }
   }
 
@@ -72,6 +83,7 @@ export default function Home() {
 
       {Navbar()}
 
+      { errorMessage.length >= 1 && (<h4>{errorMessage}</h4>)}
       <main className={styles.main} style={{ justifyContent: "flex-start" }}>
         <div className={[style.columns, style.wrow].join(" ")}>
           <div className={[style.column, style.wcol, style.wcol8].join(" ")}>
@@ -103,7 +115,7 @@ export default function Home() {
                 ))}
             </div>
 
-            <Button /*href={"/content?id=" + id}*/ onClick={save()}>Valider</Button>
+            <Button /*href={"/content?id=" + id}*/ onClick={save}>Valider</Button>
           </div>
         </div>
       </main>
