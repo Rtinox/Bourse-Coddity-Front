@@ -5,10 +5,10 @@
   border-radius: 15px;
 
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
+  flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: auto;
   align-content: center;
 
   -webkit-box-shadow: 2px 2px 15px 0px rgba(0, 0, 0, 0.25);
@@ -20,7 +20,8 @@
 
 .card > div > p {
   padding: 0px;
-  margin: 0px;
+  /*margin: 0px;*/
+  text-align: left;
 }
 
 .seeBtn {
@@ -29,7 +30,14 @@
   padding: 5px 25px 5px 25px;
   background-color: rgb(35, 161, 63);
   border-radius: 20px;
-  margin: 10px;
+  /*margin: 10px;*/
   color: white;
   font-size: 20px;
+}
+
+.item {
+  flex: 0 0 auto;
+  margin: 5px;
+
+  max-width: 90%;
 }

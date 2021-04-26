@@ -76,12 +76,12 @@ export default function Home() {
         {articles.map((article) =>
         (
           <div className={stylesC.card}>
-            <div>
+            <div className={stylesC.item}>
               <h4>{article.title}</h4>
               <p>{article.text}</p>
             </div>
-            <div>
-              {!article.loading && (<Button className={stylesC.seeBtn} href="/content">Voir</Button>)}
+            <div className={stylesC.item}>
+              {!article.loading && (<Button className={stylesC.seeBtn} href={"/content?id=" + article._id}>Voir</Button>)}
             </div>
           </div>
         ))}

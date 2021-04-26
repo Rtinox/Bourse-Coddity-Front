@@ -4,10 +4,40 @@ import style from "../styles/Content.module.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Button, Form } from "react-bootstrap";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useRouter } from 'next/router'
 
 export default function Home() {
-  const [search, setSearch] = useState("");
+
+  const apiUrl = "https://codity-wedidit.herokuapp.com/";
+  const router = useRouter()
+  const { id } = router.query;
+
+  const [title, setTitle] = useState("Chargement en cours ...");
+  const [text, setText] = useState("Ne charge pas tes épaules d'un fardeau qui excède tes forces.");
+  const [sources, setSources] = useState([]);
+  const [contributors, setContributors] = useState([]);
+
+  useEffect(async () => {
+    if (id !== undefined && id.length !== 0) {
+      const response = await fetch(apiUrl + `articles/id/${id}`, {
+        method: "GET"
+      });
+      if (response.ok) {
+        const i = await response.json();
+        setTitle(i.data.title);
+        setText(i.data.text);
+        setSources(i.data.sources);
+        setContributors(i.data.contributors);
+        console.log(i);
+      } else {
+        const i = await response.json();
+        console.error(i.data.message);
+      }
+    }
+  }, [id])
+
+
   return (
     <div className={styles.container}>
       <Head>
@@ -20,32 +50,20 @@ export default function Home() {
       <main className={styles.main} style={{ justifyContent: "flex-start" }}>
         <div className={[style.columns, style.wrow].join(" ")}>
           <div className={[style.column, style.wcol, style.wcol8].join(" ")}>
-            <h1 className={style.heading}>Title</h1>
+            <h1 className={style.heading}>{title}</h1>
             <div className={style.divblock}>
-              <p className={style.paragraph}>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Suspendisse varius enim in eros elementum tristique. Duis
-                cursus, mi quis viverra ornare, eros dolor interdum nulla, ut
-                commodo diam libero vitae erat. Aenean faucibus nibh et justo
-                cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus
-                tristique posuere.
-              </p>
+              <p className={style.paragraph}>{text}</p>
             </div>
           </div>
           <div className={[style.column2, style.wcol, style.wcol4].join(" ")}>
             <div className={style.section}>
               <h3>Sources</h3>
               <ul>
-                <li>
-                  <a href="https://proedt.fr" target="_blank">
-                    ProEDT
-                  </a>
-                </li>
-                <li>
-                  <a href="https://google.fr" target="_blank">
-                    Google
-                  </a>
-                </li>
+                {sources.map(source => (
+                  <li>
+                    <a href={source} target="_blank">{new URL(source).hostname.replace("www.", "")}</a>
+                  </li>
+                ))}
               </ul>
             </div>
             <div className={style.section}>
@@ -53,9 +71,14 @@ export default function Home() {
             </div>
             <div className={style.section}>
               <h3>Participants</h3>
+              {contributors.map(contributor => (
+                  <li>
+                    <a href={contributor} target="_blank">{contributor}</a>
+                  </li>
+                ))}
             </div>
 
-            <Button href="/edit">Edit</Button>
+            <Button href={"/edit?id=" + id}>Edit</Button>
           </div>
         </div>
       </main>
