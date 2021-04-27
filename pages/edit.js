@@ -4,10 +4,9 @@ import style from "../styles/Content.module.css";
 import Navbar from "../components/Navbar";
 import { Button, Form } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
 export default function Home() {
-
   // URL de l'api (Back)
   const apiUrl = "https://codity-wedidit.herokuapp.com/";
   const router = useRouter();
@@ -15,19 +14,20 @@ export default function Home() {
 
   // Variables de la page
   const [title, setTitle] = useState("Titre");
-  const [text, setText] = useState("Ne charge pas tes épaules d'un fardeau qui excède tes forces.");
+  const [text, setText] = useState(
+    "Ne charge pas tes épaules d'un fardeau qui excède tes forces."
+  );
   const [sources, setSources] = useState([]);
   const [contributors, setContributors] = useState([]);
 
-
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(async () => {
     // Si un id est donné
     if (id !== undefined && id.length !== 0) {
       // Récupération de l'article depuis le back
       const response = await fetch(apiUrl + `articles/id/${id}`, {
-        method: "GET"
+        method: "GET",
       });
       if (response.ok) {
         const i = await response.json();
@@ -45,7 +45,7 @@ export default function Home() {
         setText(i.data.message);
       }
     }
-  }, [id])
+  }, [id]);
 
   // Sauvegarde des modifications
   async function save() {
@@ -66,17 +66,15 @@ export default function Home() {
     const response = await fetch(apiUrl + path, {
       method: method,
       headers: {
-        "Authorization": `Bearer ${token}`,
-        'Content-Type': 'application/json'
+        Authorization: `Bearer ${token}`,
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(
-        {
-          title: title,
-          text: text,
-          sources: sources,
-          contributors: contributors
-        }
-      )
+      body: JSON.stringify({
+        title: title,
+        text: text,
+        sources: sources,
+        contributors: contributors,
+      }),
     });
     if (response.ok) {
       // Article créé et redirection vers celui-ci
@@ -99,22 +97,33 @@ export default function Home() {
 
       {Navbar()}
 
-      { errorMessage.length >= 1 && (<h4>{errorMessage}</h4>)}
+      {errorMessage.length >= 1 && <h4>{errorMessage}</h4>}
       <main className={styles.main} style={{ justifyContent: "flex-start" }}>
         <div className={[style.columns, style.wrow].join(" ")}>
           <div className={[style.column, style.wcol, style.wcol8].join(" ")}>
-            <input type="text" className={[style.titleInput, style.heading].join(" ")} value={title} onChange={(e) => setTitle(e.target.value)}></input>
+            <input
+              type="text"
+              className={[style.titleInput, style.heading].join(" ")}
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            ></input>
             <div className={style.divblock}>
-              <textarea className={style.textfield} value={text} onChange={(e) => setText(e.target.value)}></textarea>
+              <textarea
+                className={style.textfield}
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+              ></textarea>
             </div>
           </div>
           <div className={[style.column2, style.wcol, style.wcol4].join(" ")}>
             <div className={style.section}>
               <h3>Sources</h3>
               <ul>
-                {sources.map(source => (
+                {sources.map((source) => (
                   <li>
-                    <a href={source} target="_blank">{new URL(source).hostname.replace("www.", "")}</a>
+                    <a href={source} target="_blank">
+                      {new URL(source).hostname.replace("www.", "")}
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -124,14 +133,18 @@ export default function Home() {
             </div>
             <div className={style.section}>
               <h3>Participants</h3>
-              {contributors.map(contributor => (
+              {contributors.map((contributor) => (
                 <li>
-                  <a href={contributor} target="_blank">{contributor}</a>
+                  <a href={contributor} target="_blank">
+                    {contributor}
+                  </a>
                 </li>
               ))}
             </div>
 
-            <Button /*href={"/content?id=" + id}*/ onClick={save}>Valider</Button>
+            <Button /*href={"/content?id=" + id}*/ onClick={save}>
+              Valider
+            </Button>
           </div>
         </div>
       </main>

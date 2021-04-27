@@ -4,18 +4,19 @@ import style from "../styles/Content.module.css";
 import Navbar from "../components/Navbar";
 import { Button, Form } from "react-bootstrap";
 import React, { useState, useEffect } from "react";
-import { useRouter } from 'next/router'
+import { useRouter } from "next/router";
 
 export default function Home() {
-
   // URL de l'api (Back)
   const apiUrl = "https://codity-wedidit.herokuapp.com/";
-  const router = useRouter()
+  const router = useRouter();
   const { id } = router.query; // paramètre de l'url
 
   // Variables de la page
   const [title, setTitle] = useState("Chargement en cours ...");
-  const [text, setText] = useState("Ne charge pas tes épaules d'un fardeau qui excède tes forces.");
+  const [text, setText] = useState(
+    "Ne charge pas tes épaules d'un fardeau qui excède tes forces."
+  );
   const [sources, setSources] = useState([]);
   const [contributors, setContributors] = useState([]);
 
@@ -24,7 +25,7 @@ export default function Home() {
     if (id !== undefined && id.length !== 0) {
       // Récupération de l'article depuis le back
       const response = await fetch(apiUrl + `articles/id/${id}`, {
-        method: "GET"
+        method: "GET",
       });
       if (response.ok) {
         const i = await response.json();
@@ -42,7 +43,7 @@ export default function Home() {
         setText(i.data.message);
       }
     }
-  }, [id])
+  }, [id]);
 
   // Rendu de la page
   return (
@@ -66,9 +67,11 @@ export default function Home() {
             <div className={style.section}>
               <h3>Sources</h3>
               <ul>
-                {sources.map(source => (
+                {sources.map((source) => (
                   <li>
-                    <a href={source} target="_blank">{new URL(source).hostname.replace("www.", "")}</a>
+                    <a href={source} target="_blank">
+                      {new URL(source).hostname.replace("www.", "")}
+                    </a>
                   </li>
                 ))}
               </ul>
@@ -78,9 +81,11 @@ export default function Home() {
             </div>
             <div className={style.section}>
               <h3>Participants</h3>
-              {contributors.map(contributor => (
+              {contributors.map((contributor) => (
                 <li>
-                  <a href={contributor} target="_blank">{contributor}</a>
+                  <a href={contributor} target="_blank">
+                    {contributor}
+                  </a>
                 </li>
               ))}
             </div>
