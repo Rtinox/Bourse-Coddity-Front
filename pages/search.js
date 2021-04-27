@@ -2,7 +2,6 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import Navbar from "./../components/Navbar";
 import stylesC from "../styles/Search.module.css";
-import Footer from "./../components/Footer";
 import { Button, Form } from "react-bootstrap";
 import { useRouter } from 'next/router'
 import { useEffect, useState } from "react";
@@ -10,8 +9,11 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const router = useRouter()
 
+  // URL de l'api (Back)
   const apiUrl = "https://codity-wedidit.herokuapp.com/";
-  const { q } = router.query;
+  const { q } = router.query; // paramètre de l'url
+
+  // variables de la page
   const [articles, setArticles] = useState([{
     title: "Recherche en cours ...",
     text: "C'est rapide tkt",
@@ -19,37 +21,52 @@ export default function Home() {
   }]);
 
   useEffect(async () => {
+    // Si pas de recherche
     if (q === undefined || q.length === 0) {
       const response = await fetch(apiUrl + "articles/20", {
         method: "GET"
       });
       if (response.ok) {
+        // Affichage des 20 premiers articles
         const i = await response.json();
         setArticles(i.data);
-        console.log(i);
+        //console.log(i); // Debug
       } else {
+        // Erreur lors de la recherche
         const i = await response.json();
-        console.error(i.data.message);
+        setArticles([{
+          title: "Erreur",
+          text: i.data.message,
+          loading: true
+        }]);
       }
     }
     else {
+      // Si recherche
       const query = { $regex: q, $options: 'i' };
       const response = await fetch(apiUrl + "articles/search", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({$or: [{ title: query}, {text: query}, {sources: query}]})
+        body: JSON.stringify({ $or: [{ title: query }, { text: query }, { sources: query }] })
       });
       if (response.ok) {
+        // Affichage de la recherche
         const i = await response.json();
         setArticles(i.data);
-        console.log(i);
+        //console.log(i); // Debug
       } else {
+        // Erreur lors de la recherche
         const i = await response.json();
-        console.error(i.data.message);
+        setArticles([{
+          title: "Erreur",
+          text: i.data.message,
+          loading: true
+        }]);
       }
     }
   }, [q])
 
+  // Rendu de la page
   return (
     <div className={styles.container}>
       <Head>

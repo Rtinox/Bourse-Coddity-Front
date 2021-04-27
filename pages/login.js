@@ -5,19 +5,22 @@ import Footer from './../components/Footer';
 import { Form, Button } from 'react-bootstrap';
 import { useState } from 'react';
 import jwt from 'jsonwebtoken';
-import cookieCutter from 'cookie-cutter'
 
 export default function Login() {
 
+  // Variables de la page
   const [loginError, setLoginError] = useState('');
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
 
+  // URL de l'api (Back)
   const apiUrl = "https://codity-wedidit.herokuapp.com/";
 
+  // Fonction de login
   const login = async event => {
     event.preventDefault();
-    
+
+    // Envoi du mail et mot de passe au back
     const response = await fetch(apiUrl + "auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -25,18 +28,21 @@ export default function Login() {
     });
     if (response.ok) {
       const i = await response.json();
+
+      // S'il est authentifié, stockage des tokens et redirection
       const user = jwt.decode(i.data.access_token);
       window.localStorage.setItem("access_token", i.data.access_token)
       window.localStorage.setItem("refresh_token", i.data.refresh_token)
       setLoginError(`Bienvenue ${user.pseudo}`);
       window.location.href = "/";
     } else {
+      // Si erreur, affichage de celle-ci
       const i = await response.json();
       setLoginError(i.data.message);
     }
   }
 
-
+  // Rendu de la page
   return (
     <div className={styles.container}>
       <Head>
@@ -52,14 +58,14 @@ export default function Login() {
         <Form onSubmit={login}>
           <Form.Group controlId='formBasicEmail'>
             <Form.Label>Email address</Form.Label>
-            <Form.Control type='email' placeholder='Enter email' value={email} onChange={(e) => setEmail(e.target.value)} required/>
+            <Form.Control type='email' placeholder='Enter email' value={email} onChange={(e) => setEmail(e.target.value)} required />
             <Form.Text className='text-muted'>
               We'll never share your email with anyone else.
             </Form.Text>
           </Form.Group>
           <Form.Group controlId='formBasicPassword'>
             <Form.Label>Password</Form.Label>
-            <Form.Control type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} required/>
+            <Form.Control type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} required />
           </Form.Group>
           <Button variant='primary' type='submit' className='buttonForm'>
             Submit

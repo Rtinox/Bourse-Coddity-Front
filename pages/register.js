@@ -7,13 +7,16 @@ import { useState } from 'react';
 
 export default function Login() {
 
+  // Variables de la page
   const [registerError, setRegisterError] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [pseudo, setPseudo] = useState('');
 
+  // URL de l'api (Back)
   const apiUrl = "https://codity-wedidit.herokuapp.com/";
 
+  // Enregistrement depuis le back
   const register = async event => {
     event.preventDefault();
 
@@ -23,15 +26,18 @@ export default function Login() {
       body: JSON.stringify({ pseudo, email, password })
     });
     if (response.ok) {
+      // S'il est enregistré, redirection vers la page de login
       const i = await response.json();
       setRegisterError("Vous pouvez vous connecter !");
       window.location.href = "/login";
     } else {
+      // En cas d'erreur, affichage de celle-ci
       const i = await response.json();
       setRegisterError(i.data.message);
     }
   }
 
+  // Rendu de la page
   return (
     <div className={styles.container}>
       <Head>
@@ -47,17 +53,17 @@ export default function Login() {
         <Form onSubmit={register}>
           <Form.Group>
             <Form.Label>Pseudo</Form.Label>
-            <Form.Control type='text' placeholder='Enter pseudo' value={pseudo} onChange={(e) => setPseudo(e.target.value)} required/>
+            <Form.Control type='text' placeholder='Enter pseudo' value={pseudo} onChange={(e) => setPseudo(e.target.value)} required />
           </Form.Group>
 
           <Form.Group>
             <Form.Label>Email address</Form.Label>
-            <Form.Control type='email' placeholder='Enter email' value={email} onChange={(e) => setEmail(e.target.value)} required/>
+            <Form.Control type='email' placeholder='Enter email' value={email} onChange={(e) => setEmail(e.target.value)} required />
           </Form.Group>
 
           <Form.Group>
             <Form.Label>Password</Form.Label>
-            <Form.Control type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} required/>
+            <Form.Control type='password' placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} required />
           </Form.Group>
 
           <Button variant='primary' type='submit' className='buttonForm'>

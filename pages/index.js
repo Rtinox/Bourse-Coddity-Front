@@ -5,10 +5,11 @@ import Footer from "./../components/Footer";
 import { Button, Form } from "react-bootstrap";
 import React, { useState } from 'react';
 
-import cookieCutter from 'cookie-cutter'
-
 export default function Home() {
+  // Variables de la page
   const [search, setSearch] = useState('')
+
+  // Rendu de la page
   return (
     <div className={styles.container}>
       <Head>
@@ -36,8 +37,4 @@ export default function Home() {
       {Footer()}
     </div>
   );
-}
-
-const handleClick = (e) =>  {
-  this.$router.push({path: this.$route.path, query: { foo: 'bar' }});
 }

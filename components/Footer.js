@@ -1,6 +1,7 @@
 import styles from '../styles/Home.module.css';
 
 export default function Footer() {
+  // Rendu du footer
   return (
     <footer className={styles.footer}>
       <a rel='noopener noreferrer'>

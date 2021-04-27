@@ -6,12 +6,15 @@ import {useEffect, useState} from 'react';
 
 export default function Navbar() {
   const router = useRouter();
+
+  // Variables de la page
   const [logged, setLogged] = useState(false);
   const [access_token, setAccess_token] = useState('');
   const [refresh_token, setRefresh_token] = useState('');
   const [loginTest, setLoginTest] = useState(false);
   const [user, setUser] = useState(null);
 
+  // Si le login n'est n'as pas était effectué
   useEffect(function() {
     if(!loginTest)
     {
@@ -26,12 +29,12 @@ export default function Navbar() {
     setUser(jwt.decode(access_token));
   }, [refresh_token])
 
+  // Finalisation du login coté front
   useEffect(() => 
   {
     console.log(user);
     if(user != null && new Date(user.exp) > new Date())
     {
-      console.log('oui');
       setUser(null);
       window.localStorage.removeItem("access_token")
       window.localStorage.removeItem("refresh_token")
@@ -41,10 +44,16 @@ export default function Navbar() {
     else setLogged(false);
   }, [user])
 
+  // Fonction de déconnexion
   const logout = async event => {
-    
+
+    // URL de l'api (Back)
     const apiUrl = "https://codity-wedidit.herokuapp.com/";
     const token = window.localStorage.getItem("access_token");
+    
+    window.localStorage.removeItem("access_token")
+    window.localStorage.removeItem("refresh_token")
+    setLogged(false);
 
     const response = await fetch(apiUrl + "auth/logout", {
       method: "GET",
@@ -53,17 +62,16 @@ export default function Navbar() {
       }
     });
     if (response.ok) {
-      window.localStorage.removeItem("access_token")
-      window.localStorage.removeItem("refresh_token")
-      setLogged(false);
       return true;
     } else {
       const i = await response.json();
-      console.log("Erreur");
+      console.log("Erreur"); // Debug
+      console.log(i.data); // Debug
       return false;
     }
   }
 
+  // Rendu de la navbar
   return (
     <div className={styles.headercontainer}>
       <div className={styles.headeritems}>

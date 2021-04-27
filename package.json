@@ -15,5 +15,8 @@
     "react": "17.0.1",
     "react-bootstrap": "^1.5.2",
     "react-dom": "17.0.1"
+  },
+  "devDependencies": {
+    "prettier": "2.2.1"
   }
 }
