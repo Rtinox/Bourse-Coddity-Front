@@ -5,9 +5,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 First, run the development server:
 
 ```bash
+npm i
 npm run dev
-# or
-yarn dev
 ```
 You also need to install the [backend](https://github.com/Rtinox/Bourse-Codity-Back) !
 
